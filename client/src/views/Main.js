@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {Link} from '@reach/router';
+import DeleteAuthor from "../components/Delete";
 import axios from 'axios';
 
 
@@ -45,7 +46,7 @@ export default () => {
                                         return (<tr key = {i}>
                                             <td>{author.name}</td>
                                             <td><Link to={"/author/" + author._id + "/edit"}>Edit |</Link>
-                                                <Link to={"/delete/" + author._id}>Delete</Link></td>
+                                            <DeleteAuthor authorId = {author._id} successCallback = {() => removeFromDom(author._id)}/></td>
                                             </tr>
                                     )})}
                             </tbody>
