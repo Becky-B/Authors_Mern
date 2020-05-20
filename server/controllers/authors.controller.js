@@ -15,7 +15,7 @@ module.exports.getAllAuthors = (req, res) => {
 module.exports.editAuthor = (req,res)=> {
     Author.findOneAndUpdate({_id: req.params.id}, req.body, {new:true})
             .then(editAuthor => res.json(editAuthor))
-            .catch(err => res.json(err));
+            .catch(err => res.status(400).json(err));
 }
 
 module.exports.createAuthor = (request, response) => {
@@ -24,7 +24,7 @@ module.exports.createAuthor = (request, response) => {
         name
     })
         .then(author => response.json(author))
-        .catch(err => response.json(err));
+        .catch(err => response.status(400).json(err));
 }
 
 module.exports.getOneAuthor = (req, res) =>{

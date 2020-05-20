@@ -39,7 +39,9 @@ export default () => {
                                 </tr>
                             </thead>
                             <tbody>
-                                    {author.map((author, i ) => {
+                                    {author
+                                    .sort((a, b) => a.name > b.name ? 1 : -1)
+                                    .map((author, i ) => {
                                         return (<tr key = {i}>
                                             <td>{author.name}</td>
                                             <td><Link to={"/author/" + author._id + "/edit"}>Edit |</Link>

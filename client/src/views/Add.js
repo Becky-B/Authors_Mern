@@ -6,6 +6,7 @@ import axios from 'axios';
 export default ()=>{
     const [name, setName] = useState('');
     const [loaded, setLoaded] = useState(false);
+    const [errors, setErrors] = useState([]);
 
     const addAuthor = (name) => {
         console.log(name)
@@ -17,7 +18,14 @@ export default ()=>{
             navigate("/")
             console.log(res)
         })
-        .catch(err=>console.log(err))
+        .catch(err=>{
+            const errorResponse = err.response.data.errors;
+            const errorArr = [];
+            for(const key of Object.keys(errorResponse)) {
+                errorArr.push(errorResponse[key].message)
+            }
+            setErrors(errorArr);
+        })
         
     }
 
@@ -36,6 +44,7 @@ export default ()=>{
         <div className="row">
             <div className="col-sm">
                 <h5>Add a new author</h5>
+                {errors.map((err,index) => <p key = {index}>{err}</p>)}
                 <AuthorForm onSubmitProp={addAuthor} initialName = {name}/>
             </div>
         </div>
